@@ -5,6 +5,8 @@ import '../providers/transaction_provider.dart';
 import '../models/transaction.dart';
 
 class CheckoutScreen extends StatelessWidget {
+  const CheckoutScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {

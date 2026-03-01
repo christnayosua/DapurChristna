@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AboutMeScreen extends StatelessWidget {
+  const AboutMeScreen({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,8 @@ class AboutMeScreen extends StatelessWidget {
           ),
         ),
       ),
+
+      // Page Theme
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -32,6 +36,8 @@ class AboutMeScreen extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
+
+        // User Information: Christna Yosua Rotinsulu
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

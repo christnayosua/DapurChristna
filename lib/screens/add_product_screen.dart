@@ -4,6 +4,7 @@ import '../models/product.dart';
 import '../providers/product_provider.dart';
 
 class AddProductScreen extends StatelessWidget {
+  AddProductScreen({super.key});
 
   final name = TextEditingController();
   final category = TextEditingController();
@@ -15,79 +16,85 @@ class AddProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      // ================= APP BAR =================
       appBar: AppBar(
-        title: Text("Add Food Menu"),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Color(0xFF1976D2),
-                Color(0xFF42A5F5),
-                Colors.white,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black87,
+        title: const Text(
+          "Add Food Menu",
+          style: TextStyle(fontWeight: FontWeight.w600),
         ),
       ),
+
+      // ================= BODY =================
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.white,
-              Color(0xFFE3F2FD),
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                TextField(
-                  controller: name,
-                  decoration: InputDecoration(labelText: "Menu Name"),
-                ),
-                SizedBox(height: 10),
-                TextField(
-                  controller: category,
-                  decoration: InputDecoration(labelText: "Category"),
-                ),
-                SizedBox(height: 10),
-                TextField(
-                  controller: description,
-                  decoration: InputDecoration(labelText: "Description"),
-                ),
-                SizedBox(height: 10),
-                TextField(
-                  controller: imageUrl,
-                  decoration: InputDecoration(labelText: "Image URL"),
-                ),
-                SizedBox(height: 10),
-                TextField(
-                  controller: stock,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(labelText: "Stock"),
-                ),
-                SizedBox(height: 10),
-                TextField(
-                  controller: price,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(labelText: "Price"),
-                ),
-                SizedBox(height: 20),
-                ElevatedButton(
+        color: const Color(0xFFF8FAFC),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+
+              _buildInput(
+                controller: name,
+                label: "Menu Name",
+                icon: Icons.restaurant_menu,
+              ),
+
+              _buildInput(
+                controller: category,
+                label: "Category",
+                icon: Icons.category_outlined,
+              ),
+
+              _buildInput(
+                controller: description,
+                label: "Description",
+                icon: Icons.description_outlined,
+                maxLines: 3,
+              ),
+
+              _buildInput(
+                controller: imageUrl,
+                label: "Image URL",
+                icon: Icons.image_outlined,
+              ),
+
+              _buildInput(
+                controller: stock,
+                label: "Stock",
+                icon: Icons.inventory_2_outlined,
+                keyboardType: TextInputType.number,
+              ),
+
+              _buildInput(
+                controller: price,
+                label: "Price",
+                icon: Icons.attach_money,
+                keyboardType: TextInputType.number,
+              ),
+
+              const SizedBox(height: 24),
+
+              // ================= BUTTON =================
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF1976D2),
+                    backgroundColor: const Color(0xFF1976D2),
                     foregroundColor: Colors.white,
-                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    elevation: 0,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                   onPressed: () {
-                    Provider.of<ProductProvider>(context, listen: false)
-                        .addProduct(
+                    Provider.of<ProductProvider>(
+                      context,
+                      listen: false,
+                    ).addProduct(
                       Product(
                         name: name.text,
                         category: category.text,
@@ -97,12 +104,51 @@ class AddProductScreen extends StatelessWidget {
                         description: description.text,
                       ),
                     );
+
                     Navigator.pop(context);
                   },
-                  child: Text("Save"),
-                )
-              ],
-            ),
+                  child: const Text(
+                    "Save Product",
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ================= INPUT WIDGET =================
+  Widget _buildInput({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+    TextInputType keyboardType = TextInputType.text,
+    int maxLines = 1,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 14),
+      child: TextField(
+        controller: controller,
+        keyboardType: keyboardType,
+        maxLines: maxLines,
+        decoration: InputDecoration(
+          labelText: label,
+          prefixIcon: Icon(icon),
+          filled: true,
+          fillColor: Colors.white,
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 14,
+            vertical: 14,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none,
           ),
         ),
       ),

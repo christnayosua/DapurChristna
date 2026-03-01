@@ -104,4 +104,4 @@ Selama proses pengembangan aplikasi ini, saya mempelajari bagaimana membangun ap
 ## 🔗 Repository
 
 GitHub Repository:
-https://github.com/christnayosua/dapurchirst.git
+https://github.com/christnayosua/DapurChristna.git

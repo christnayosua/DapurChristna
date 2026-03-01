@@ -72,7 +72,7 @@ lib/
 1. Clone repository:
 
 ```
-git clone https://github.com/christnayosua/dapurchirst.git
+https://github.com/christnayosua/DapurChristna.git
 ```
 
 2. Masuk ke folder project:
